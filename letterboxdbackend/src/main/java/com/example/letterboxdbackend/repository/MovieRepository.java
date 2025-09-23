@@ -17,15 +17,15 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     
     List<Movie> findByStartYearBetween(Integer startYear, Integer endYear);
     
-    @Query("SELECT m FROM Movie m WHERE " +
-           "(LOWER(m.primaryTitle) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-           "LOWER(m.originalTitle) LIKE LOWER(CONCAT('%', :query, '%'))) " +
-           "AND m.type = 'movie' " +
-           "ORDER BY m.aggregateRating DESC NULLS LAST")
+    @Query("SELECT movie FROM Movie movie WHERE " +
+           "(LOWER(movie.primaryTitle) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+           "LOWER(movie.originalTitle) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+           "AND movie.type = 'movie' " +
+           "ORDER BY movie.aggregateRating DESC NULLS LAST")
     List<Movie> searchMoviesByTitle(@Param("query") String query);
     
-    @Query("SELECT m FROM Movie m WHERE m.type = 'movie' AND m.aggregateRating IS NOT NULL " +
-           "ORDER BY m.aggregateRating DESC, m.voteCount DESC")
+    @Query("SELECT movie FROM Movie movie WHERE movie.type = 'movie' AND movie.aggregateRating IS NOT NULL " +
+           "ORDER BY movie.aggregateRating DESC, movie.voteCount DESC")
     List<Movie> findTopRatedMovies();
     
     boolean existsByImdbId(String imdbId);
