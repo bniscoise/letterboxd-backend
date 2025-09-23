@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public User createUser(String username, String email) {
-        User user = new User(); // création sans builder
+        User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         return userRepository.save(user);
@@ -28,6 +28,6 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+                .orElseThrow(() -> new RuntimeException("unknown user"));
     }
 }
