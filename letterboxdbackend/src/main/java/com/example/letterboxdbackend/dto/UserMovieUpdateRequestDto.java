@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
-public class UserMovieUpdateRequest {
+public class UserMovieUpdateRequestDto {
 
     @Min(0)
     @Max(5)

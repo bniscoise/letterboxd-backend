@@ -1,6 +1,6 @@
 package com.example.letterboxdbackend.service;
 
-import com.example.letterboxdbackend.dto.ImdbApiResponse;
+import com.example.letterboxdbackend.dto.ImdbApiResponseDto;
 import com.example.letterboxdbackend.dto.MovieDto;
 import com.example.letterboxdbackend.model.Movie;
 import com.example.letterboxdbackend.repository.MovieRepository;
@@ -32,7 +32,7 @@ public class MovieService {
      * @param imdbTitle
      * @return movie object
      */
-    private Movie convertToMovie(ImdbApiResponse.ImdbTitle imdbTitle) {
+    private Movie convertToMovie(ImdbApiResponseDto.ImdbTitle imdbTitle) {
         Movie movie = new Movie();
         movie.setImdbId(imdbTitle.getId());
         movie.setPrimaryTitle(imdbTitle.getPrimaryTitle());
@@ -66,7 +66,7 @@ public class MovieService {
             logger.info("Calling IMDB API for {}", query);
             String url = IMDB_API_BASE_URL + "?query=" + query;
 
-            ImdbApiResponse response = restTemplate.getForObject(url, ImdbApiResponse.class);
+            ImdbApiResponseDto response = restTemplate.getForObject(url, ImdbApiResponseDto.class);
 
             if (response == null || response.getTitles() == null) {
                 logger.warn("404 movie not found");

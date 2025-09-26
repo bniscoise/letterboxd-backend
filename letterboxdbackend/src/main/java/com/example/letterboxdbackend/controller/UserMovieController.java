@@ -1,8 +1,8 @@
 package com.example.letterboxdbackend.controller;
 
 import com.example.letterboxdbackend.dto.UserMovieDto;
-import com.example.letterboxdbackend.dto.UserMovieRequest;
-import com.example.letterboxdbackend.dto.UserMovieUpdateRequest;
+import com.example.letterboxdbackend.dto.UserMovieRequestDto;
+import com.example.letterboxdbackend.dto.UserMovieUpdateRequestDto;
 import com.example.letterboxdbackend.model.UserMovie;
 import com.example.letterboxdbackend.service.UserMovieService;
 import jakarta.validation.Valid;
@@ -33,7 +33,7 @@ public class UserMovieController {
     @PostMapping
     public ResponseEntity<UserMovieDto> addMovieToUser(
             @PathVariable Long userId,
-            @Valid @RequestBody UserMovieRequest request) {
+            @Valid @RequestBody UserMovieRequestDto request) {
 
         UserMovie userMovie = userMovieService.saveOrUpdateUserMovie(userId, request.getMovieId(),
                 request.getRating(), request.getReview());
@@ -44,7 +44,7 @@ public class UserMovieController {
     public ResponseEntity<UserMovieDto> updateUserMovie(
             @PathVariable Long userId,
             @PathVariable Long movieId,
-            @Valid @RequestBody UserMovieUpdateRequest request) {
+            @Valid @RequestBody UserMovieUpdateRequestDto request) {
 
         return userMovieService.getUserMovie(userId, movieId)
                 .map(userMovie -> userMovieService.saveOrUpdateUserMovie(userId, movieId, request.getRating(),
