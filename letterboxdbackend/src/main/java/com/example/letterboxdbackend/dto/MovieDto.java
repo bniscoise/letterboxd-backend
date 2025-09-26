@@ -1,20 +1,15 @@
 package com.example.letterboxdbackend.dto;
 
 import com.example.letterboxdbackend.model.Movie;
-import java.time.LocalDateTime;
 
 public class MovieDto {
-    // Attributs
     private Long id;
-    private String primaryTitle;
-    private String originalTitle;
-    private String overview;
-    private Integer startYear;
-    private Integer endYear;
-    private String type;
+    private String imdbId;
+    private String title;
+    private Integer year;
     private String posterUrl;
     private Double aggregateRating;
-    private LocalDateTime createdAt;
+    private Long voteCount;
 
     public MovieDto() {
     }
@@ -22,15 +17,12 @@ public class MovieDto {
     // Constructeur
     public MovieDto(Movie movie) {
         this.id = movie.getId();
-        this.primaryTitle = movie.getPrimaryTitle();
-        this.originalTitle = movie.getOriginalTitle();
-        this.overview = movie.getOverview();
-        this.startYear = movie.getStartYear();
-        this.endYear = movie.getEndYear();
-        this.type = movie.getType();
+        this.imdbId = movie.getImdbId();
+        this.title = movie.getPrimaryTitle();
+        this.year = movie.getStartYear();
         this.posterUrl = movie.getPosterUrl();
         this.aggregateRating = movie.getAggregateRating();
-        this.createdAt = movie.getCreatedAt();
+        this.voteCount = movie.getVoteCount();
     }
 
     // Getters et Setters
@@ -42,52 +34,28 @@ public class MovieDto {
         this.id = id;
     }
 
-    public String getPrimaryTitle() {
-        return primaryTitle;
+    public String getImdbId() {
+        return imdbId;
     }
 
-    public void setPrimaryTitle(String primaryTitle) {
-        this.primaryTitle = primaryTitle;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getOverview() {
-        return overview;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public Integer getStartYear() {
-        return startYear;
-    }
-
-    public void setStartYear(Integer startYear) {
-        this.startYear = startYear;
-    }
-
-    public Integer getEndYear() {
-        return endYear;
-    }
-
-    public void setEndYear(Integer endYear) {
-        this.endYear = endYear;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public String getPosterUrl() {
@@ -106,11 +74,11 @@ public class MovieDto {
         this.aggregateRating = aggregateRating;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public Long getVoteCount() {
+        return voteCount;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setVoteCount(Long voteCount) {
+        this.voteCount = voteCount;
     }
 }

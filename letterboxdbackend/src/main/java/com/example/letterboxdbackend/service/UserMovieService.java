@@ -6,9 +6,11 @@ import com.example.letterboxdbackend.model.UserMovie;
 import com.example.letterboxdbackend.repository.MovieRepository;
 import com.example.letterboxdbackend.repository.UserMovieRepository;
 import com.example.letterboxdbackend.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserMovieService {
@@ -25,30 +27,53 @@ public class UserMovieService {
         this.userRepository = userRepository;
     }
 
-    public UserMovie addOrUpdateMovieForUser(Long userId, Long movieId, Integer rating, String review) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+    public List<UserMovie> getMoviesForUser(Long userId) {
+        User user = getUser(userId);
+        return userMovieRepository.findByUser(user);
+    }
 
-        Movie movie = movieRepository.findById(movieId)
-                .orElseThrow(() -> new RuntimeException("Film introuvable"));
+    public Optional<UserMovie> getUserMovie(Long userId, Long movieId) {
+        User user = getUser(userId);
+        Movie movie = getMovie(movieId);
+        return userMovieRepository.findByUserAndMovie(user, movie);
+    }
+
+    @Transactional
+    public UserMovie saveOrUpdateUserMovie(Long userId, Long movieId, Integer rating, String review) {
+        User user = getUser(userId);
+        Movie movie = getMovie(movieId);
 
         UserMovie userMovie = userMovieRepository.findByUserAndMovie(user, movie)
-                .orElse(new UserMovie());
+                .orElseGet(() -> {
+                    UserMovie created = new UserMovie();
+                    created.setUser(user);
+                    created.setMovie(movie);
+                    return created;
+                });
 
-        if (userMovie.getId() == null) {
-            userMovie.setUser(user);
-            userMovie.setMovie(movie);
+        if (rating != null) {
+            userMovie.setRating(rating);
         }
 
-        userMovie.setRating(rating);
         userMovie.setReview(review);
 
         return userMovieRepository.save(userMovie);
     }
 
-    public List<UserMovie> getMoviesForUser(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
-        return userMovieRepository.findByUser(user);
+    @Transactional
+    public void removeMovieForUser(Long userId, Long movieId) {
+        User user = getUser(userId);
+        Movie movie = getMovie(movieId);
+        userMovieRepository.deleteByUserAndMovie(user, movie);
+    }
+
+    private User getUser(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
+    }
+
+    private Movie getMovie(Long movieId) {
+        return movieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalArgumentException("Film introuvable"));
     }
 }
