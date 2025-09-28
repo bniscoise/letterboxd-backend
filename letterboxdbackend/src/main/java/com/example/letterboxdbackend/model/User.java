@@ -1,5 +1,6 @@
 package com.example.letterboxdbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,10 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
+    @Column(nullable = false, length = 255)
+    private String password;
+
     // Constructeurs
     public User() {
     }
@@ -23,6 +28,12 @@ public class User {
     public User(String username, String email) {
         this.username = username;
         this.email = email;
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     // Getters et Setters
@@ -48,5 +59,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

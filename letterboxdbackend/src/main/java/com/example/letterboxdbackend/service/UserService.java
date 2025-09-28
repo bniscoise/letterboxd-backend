@@ -16,9 +16,14 @@ public class UserService {
     }
 
     public User createUser(String username, String email) {
+        return createUser(username, email, "");
+    }
+
+    public User createUser(String username, String email, String password) {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
+        user.setPassword(password);
         return userRepository.save(user);
     }
 
