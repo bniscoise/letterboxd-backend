@@ -23,7 +23,7 @@ public class UserMovieController {
     public ResponseEntity<UserMovieDto> addOrUpdateMovie(
             @PathVariable Long userId,
             @PathVariable Long movieId,
-            @RequestParam(required = false) Integer rating,
+            @RequestParam(required = false) Double rating,
             @RequestParam(required = false) String review) {
 
         UserMovie userMovie = userMovieService.addOrUpdateMovieForUser(userId, movieId, rating, review);

@@ -6,7 +6,7 @@ public class UserMovieDto {
     // attributs
     private Long movieId;
     private String movieTitle;
-    private Integer rating;
+    private Double rating;
     private String review;
 
     public UserMovieDto() {
@@ -37,11 +37,11 @@ public class UserMovieDto {
         this.movieTitle = movieTitle;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return this.rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

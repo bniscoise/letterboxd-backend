@@ -25,7 +25,7 @@ public class UserMovieService {
         this.userRepository = userRepository;
     }
 
-    public UserMovie addOrUpdateMovieForUser(Long userId, Long movieId, Integer rating, String review) {
+    public UserMovie addOrUpdateMovieForUser(Long userId, Long movieId, Double rating, String review) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
 
