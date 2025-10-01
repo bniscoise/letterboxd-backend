@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Classe gérant toute l'authentification.
+ * 
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -52,14 +56,17 @@ public class AuthController {
 
     public record RegisterRequest(
             @NotBlank String username,
-            @Email String email,
-            @NotBlank String password
-    ) {}
+            @Email(message = "invalid email") String email,
+            @NotBlank String password) {
+    }
 
     public record LoginRequest(
             @NotBlank String username,
-            @NotBlank String password
-    ) {}
+            @NotBlank String password) {
+    }
 
-    public record AuthResponse(Long id, String username, String email, String token) {}
+    public record AuthResponse(Long id, String username, String email, String token) {
+    }
+    // TODO : hasher les mots de passes afin qu'ils ne soient pas stockés en clairs
+    // dans la bdd
 }
