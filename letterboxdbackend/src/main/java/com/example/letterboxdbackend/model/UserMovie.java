@@ -18,7 +18,7 @@ public class UserMovie {
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-    private Integer rating;
+    private Double rating;
 
     @Column(length = 2000)
     private String review;
@@ -27,7 +27,7 @@ public class UserMovie {
     public UserMovie() {
     }
 
-    public UserMovie(User user, Movie movie, Integer rating, String review) {
+    public UserMovie(User user, Movie movie, Double rating, String review) {
         this.user = user;
         this.movie = movie;
         this.rating = rating;
@@ -59,11 +59,11 @@ public class UserMovie {
         this.movie = movie;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

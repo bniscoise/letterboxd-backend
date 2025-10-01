@@ -10,13 +10,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service permettant d'ajouter de noter et de critiquer des films dans la liste
+ * des utilisateurs.
+ * 
+ */
 @Service
 public class UserMovieService {
 
+    // attributs
     private final UserMovieRepository userMovieRepository;
     private final MovieRepository movieRepository;
     private final UserRepository userRepository;
 
+    // Constructeur
     public UserMovieService(UserMovieRepository userMovieRepository,
             MovieRepository movieRepository,
             UserRepository userRepository) {
@@ -25,7 +32,17 @@ public class UserMovieService {
         this.userRepository = userRepository;
     }
 
-    public UserMovie addOrUpdateMovieForUser(Long userId, Long movieId, Integer rating, String review) {
+    /**
+     * Associe un film à un utilisateur
+     * Ajoute aussi une note et une critique
+     * 
+     * @param userId
+     * @param movieId
+     * @param rating
+     * @param review
+     * @return
+     */
+    public UserMovie addOrUpdateMovieForUser(Long userId, Long movieId, Double rating, String review) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
 
@@ -46,6 +63,11 @@ public class UserMovieService {
         return userMovieRepository.save(userMovie);
     }
 
+    /**
+     * 
+     * @param userId
+     * @return la liste des films d'un utilisateur
+     */
     public List<UserMovie> getMoviesForUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
