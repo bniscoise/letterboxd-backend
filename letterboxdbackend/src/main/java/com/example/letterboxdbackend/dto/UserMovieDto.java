@@ -14,7 +14,9 @@ public class UserMovieDto {
 
     public UserMovieDto(UserMovie userMovie) {
         this.movieId = userMovie.getMovie().getId();
-        this.movieTitle = userMovie.getMovie().getPrimaryTitle();
+        String primaryTitle = userMovie.getMovie().getPrimaryTitle();
+        String originalTitle = userMovie.getMovie().getOriginalTitle();
+        this.movieTitle = (primaryTitle == null || primaryTitle.isBlank()) ? originalTitle : primaryTitle;
         this.rating = userMovie.getRating();
         this.review = userMovie.getReview();
     }
