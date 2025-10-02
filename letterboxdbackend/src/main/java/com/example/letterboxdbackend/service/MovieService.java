@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -107,5 +108,9 @@ public class MovieService {
         }
         return searchFromImdbAndSave(query);
 
+    }
+
+    public Optional<MovieDto> getMovieById(Long id) {
+        return movieRepository.findById(id).map(MovieDto::new);
     }
 }

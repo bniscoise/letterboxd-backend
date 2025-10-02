@@ -38,4 +38,11 @@ public class UserMovieController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
+
+    @DeleteMapping("/{userId}/{movieId}")
+    public ResponseEntity<UserMovieDto> deleteUserMovie(@PathVariable Long userId, @PathVariable Long movieId) {
+        userMovieService.deleteMovieFromUserList(userId, movieId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

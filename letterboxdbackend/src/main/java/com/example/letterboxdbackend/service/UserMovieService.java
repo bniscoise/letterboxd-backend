@@ -63,6 +63,20 @@ public class UserMovieService {
         return userMovieRepository.save(userMovie);
     }
 
+    public void deleteMovieFromUserList(Long userId, Long movieId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new RuntimeException("Film introuvable"));
+
+        UserMovie userMovie = userMovieRepository.findByUserAndMovie(user, movie)
+                .orElseThrow(() -> new RuntimeException("Ce film ne fait pas partie de la liste de l'utilisateur"));
+
+        userMovieRepository.delete(userMovie);
+
+    }
+
     /**
      * 
      * @param userId
