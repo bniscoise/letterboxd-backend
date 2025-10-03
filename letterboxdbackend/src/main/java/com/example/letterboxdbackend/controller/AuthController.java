@@ -67,6 +67,5 @@ public class AuthController {
 
     public record AuthResponse(Long id, String username, String email, String token) {
     }
-    // TODO : hasher les mots de passes afin qu'ils ne soient pas stockés en clairs
-    // dans la bdd
+
 }
