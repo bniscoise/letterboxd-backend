@@ -1,2 +1,9 @@
-/mvnw text eol=lf
+# Windows batch files => CRLF
 *.cmd text eol=crlf
+mvnw.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Unix shell scripts => LF
+*.sh text eol=lf
+mvnw text eol=lf
+
