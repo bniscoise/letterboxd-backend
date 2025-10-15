@@ -10,6 +10,7 @@ public class UserMovieDto {
     private String review;
     private Long userId;
     private String username;
+    private String posterUrl;
 
     public UserMovieDto() {
     }
@@ -23,6 +24,7 @@ public class UserMovieDto {
         this.review = userMovie.getReview();
         this.userId = userMovie.getUser().getId();
         this.username = userMovie.getUser().getUsername();
+        this.posterUrl = userMovie.getMovie().getPosterUrl();
     }
 
     // Getters et Setters
@@ -73,5 +75,13 @@ public class UserMovieDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 }
